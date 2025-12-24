@@ -1,3 +1,6 @@
 [submodule "eureka-server"]
 	path = eureka-server
 	url = git@github.com:Suleiman-Moraes/arq-base-eureka-server.git
+[submodule "gateway-server"]
+	path = gateway-server
+	url = git@github.com:Suleiman-Moraes/arq-base-gateway-server.git
