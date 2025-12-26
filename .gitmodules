@@ -4,6 +4,3 @@
 [submodule "gateway-server"]
 	path = gateway-server
 	url = git@github.com:Suleiman-Moraes/arq-base-gateway-server.git
-[submodule "admin-server"]
-	path = admin-server
-	url = git@github.com:Suleiman-Moraes/arq-base-admin-server.git

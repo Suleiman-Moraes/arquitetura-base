@@ -1,0 +1,55 @@
+services:
+
+  eureka-server:
+    build:
+      context: eureka-server/.
+      dockerfile: Dockerfile
+    container_name: eureka-server
+    restart: always
+    networks:
+      - arq-base-net
+    ports:
+      - '8761:8761'
+
+  gateway-server:
+    build:
+      context: gateway-server/.
+      dockerfile: Dockerfile
+    container_name: gateway-server
+    restart: always
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka
+    networks:
+      - arq-base-net
+    ports:
+      - '8080:8080'
+
+  test-server:
+    build:
+      context: test-server/.
+      dockerfile: Dockerfile
+    container_name: test-server
+    restart: always
+    depends_on:
+      - eureka-server
+    environment:
+      - EUREKA_SERVER_URL=http://eureka-server:8761/eureka
+    networks:
+      - arq-base-net
+    ports:
+      - '8079:8079'
+
+networks:
+  arq-base-net:
+    driver: bridge
+
+volumes:
+  postgresdata:
+
+# mvn clean install
+# docker-compose -f compose.yaml up -d
+
+# docker build -f Dockerfile -t device_api .
+# docker build -f Dockerfile2 -t suleimanmoraes/device_api:1.0.0 -t suleimanmoraes/device_api:latest .
